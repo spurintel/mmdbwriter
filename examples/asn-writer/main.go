@@ -7,6 +7,7 @@ import (
 	"errors"
 	"io"
 	"log"
+	"math"
 	"net"
 	"os"
 	"strconv"
@@ -58,6 +59,9 @@ func main() {
 			asn, err := strconv.Atoi(row[1])
 			if err != nil {
 				log.Fatal(err)
+			}
+			if asn < 0 || asn > math.MaxUint32 {
+				log.Fatalf("ASN %d out of range for uint32", asn)
 			}
 
 			record := mmdbtype.Map{}
